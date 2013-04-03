@@ -6,6 +6,6 @@ function force = peach_koehler (stress, bvec, lvec)
 
     %% Calculate the Peach-Koehler force
     v = cross(bvec, lvec);  % Cross product
-    force = stress * v';
+    force = (stress * v')';
 end
     
