@@ -15,6 +15,6 @@ timeStep = 10.0e-09;                    % s
 appliedStress = [ 0 0 0;
                   0 0 0;
                   0 0 1 ];              % Pa
-stoppingCritrion = 1;                   % 1: Number of steps; 2: time
-limitingSteps    = 1000;                % Number of steps
-limitingTime     = 1.0;                 % Total time limit
+stoppingCriterion = 1;                  % 1: Number of steps; 2: time
+limitingSteps     = 1000;               % Number of steps
+limitingTime      = 1.0;                % Total time limit
