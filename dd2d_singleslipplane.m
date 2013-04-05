@@ -8,8 +8,8 @@ initializeSimulation;
 %% Load data from files
 dList = readDislocationList ( dislocationStructureFile );
 dSourceList = readDislocationSourceList ( dislocationSourceFile );
-nDisl = length(dList);
-nDSources = length(dSourceList);
+% nDisl = length(dList);
+% nDSources = length(dSourceList);
 
 %% Slip plane
 slipPlane = createSlipPlane (dList, dSourceList, extremities, fpos);
@@ -18,12 +18,12 @@ normSlipPlaneVector = norm(slipPlaneVector);
 SchmidFactor = slipPlaneVector(1)*slipPlaneVector(2)/(normSlipPlaneVector*normSlipPlaneVector);
 
 %% Pre-allocate and calculate dislocationPosition and dSourcePosition vectors
-dislocationPosition = zeros(nDisl, 3);
-dSourcePositions = zeros(nDSources, 3);
-for i=1:nDSources
-    dislocationPosition(i,:) = positionVector (dList(i).f, slipPlane.es);
-    dSourcePositions(i,:) = positionVector (dSourceList(i).f, slipPlane.es);
-end
+% dislocationPosition = zeros(nDisl, 3);
+% dSourcePositions = zeros(nDSources, 3);
+% for i=1:nDSources
+%     dislocationPosition(i,:) = positionVector (dList(i).f, slipPlane.es);
+%     dSourcePositions(i,:) = positionVector (dSourceList(i).f, slipPlane.es);
+% end
 
 %% Initiate the figure
 figureHandle = figure;
@@ -35,6 +35,17 @@ continueSimulation = true;
 
 %% Iterate
 while continueSimulation
+    %% Pre-allocate and calculate dislocationPosition and dSourcePosition vectors
+    nDisl = length(dList);
+    nDSources = length(dSourceList);
+    
+    dislocationPosition = zeros(nDisl, 3);
+    dSourcePositions = zeros(nDSources, 3);
+    for i=1:nDSources
+        dislocationPosition(i,:) = positionVector (dList(i).f, slipPlane.es);
+        dSourcePositions(i,:) = positionVector (dSourceList(i).f, slipPlane.es);
+    end
+    
     %% Forces
     % Peach-Koehler force
     f_PK = dislocation_PKForces(appliedStress, dList);
@@ -60,7 +71,7 @@ while continueSimulation
     dipoleEmissions = checkDipoleEmissions (tau, dSourceList);
     for i=1:nDSources
         if (dipoleEmissions(i))
-            dList = emitDipole (dSourceList(i), dList, slipPlane.es, tau. mu, nu, BurgersVector);
+            dList = emitDipole (dSourceList(i), dList, slipPlane.es, tau, mu, nu, BurgersVector);
         end
     end
     

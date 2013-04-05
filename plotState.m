@@ -11,7 +11,7 @@ function plotState (figureHandle, dislocationPosition, dSourcePositions, slipPla
     plot3 (slipPlane(:,1), slipPlane(:,2), slipPlane(:,3), '-r');
     
     %% Draw dislocations
-    plot3 (dislocationPosition(:,1), dislocationPosition(:,2), dislocationPosition(:,3), 'xg');
+    plot3 (dislocationPosition(:,1), dislocationPosition(:,2), dislocationPosition(:,3), 'xk');
     
     %% Draw dislocation sources
     plot3 (dSourcePositions(:,1), dSourcePositions(:,2), dSourcePositions(:,3), 'ob');
