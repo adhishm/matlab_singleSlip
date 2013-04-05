@@ -84,4 +84,5 @@ while continueSimulation
             continueSimulation = false;
         end
     end
+    pause
 end
