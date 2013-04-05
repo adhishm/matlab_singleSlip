@@ -60,6 +60,7 @@ while continueSimulation
     end
     
     %% Plot state
+    plotState (dislocationPosition, dSourceList, slipPlane);
     
     %% Simulation parameters
     % Time step
