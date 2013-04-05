@@ -9,11 +9,13 @@ initializeSimulation;
 dList = readDislocationList ( dislocationStructureFile );
 dSourceList = readDislocationSourceList ( dislocationSourceFile );
 nDisl = length(dList);
+nDSources = length(dSourceList);
 
 %% Slip plane
 slipPlane = createSlipPlane (dList, dSourceList, extremities, fpos);
 slipPlaneVector = slipPlane.es(1,:) - slipPlane.es(2,:);
 normSlipPlaneVector = norm(slipPlaneVector);
+SchmidFactor = slipPlaneVector(1)*slipPlaneVector(2)/(normSlipPlaneVector*normSlipPlaneVector);
 
 %% Pre-allocate and calculate dislocationPosition vector
 dislocationPosition = zeros(nDisl, 3);
@@ -46,12 +48,24 @@ while continueSimulation
         % Calculate fractional position
         dList(i).f = norm(dislocationPosition(i,:) - slipPlane.es(1,:))/normSlipPlaneVector;
     end
-    % Dislocation dipole emissions
     
+    %% Dislocation dipole emissions
+    % Resolved shear stress
+    tau = ( (appliedStress(1,1)+appliedStress(2,2)) * SchmidFactor ) + appliedStress(1,2);
+    dipoleEmissions = checkDipoleEmissions (tau, dSourceList);
+    for i=1:nDSources
+        if (dipoleEmissions(i))
+            dList = emitDipole (dSourceList(i), dList, slipPlane.es, tau. mu, nu, BurgersVector);
+        end
+    end
+    
+    %% Plot state
+    
+    %% Simulation parameters
     % Time step
-    totalTime = totalTime + timeStep;    
+    totalTime = totalTime + timeStep;
     % Number of iterations
-    totalSteps = totalSteps + 1;    
+    totalSteps = totalSteps + 1;
     % Stopping criterion
     if stoppingCriterion==1
         % Number of steps
