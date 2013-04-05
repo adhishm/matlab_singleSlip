@@ -17,11 +17,16 @@ slipPlaneVector = slipPlane.es(1,:) - slipPlane.es(2,:);
 normSlipPlaneVector = norm(slipPlaneVector);
 SchmidFactor = slipPlaneVector(1)*slipPlaneVector(2)/(normSlipPlaneVector*normSlipPlaneVector);
 
-%% Pre-allocate and calculate dislocationPosition vector
+%% Pre-allocate and calculate dislocationPosition and dSourcePosition vectors
 dislocationPosition = zeros(nDisl, 3);
+dSourcePositions = zeros(nDSources, 3);
 for i=1:nDisl
     dislocationPosition(i,:) = positionVector (dList(i).f, slipPlane.es);
+    dSourcePositions(i,:) = positionVector (dSourceList(i).f, slipPlane.es);
 end
+
+%% Initiate the figure
+figureHandle = figure;
 
 %% Iteration counters
 totalTime = 0.0;
@@ -60,7 +65,7 @@ while continueSimulation
     end
     
     %% Plot state
-    plotState (dislocationPosition, dSourceList, slipPlane);
+    plotState (figureHandle, dislocationPosition, dSourcePositions, slipPlane.es);
     
     %% Simulation parameters
     % Time step
