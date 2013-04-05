@@ -20,7 +20,7 @@ SchmidFactor = slipPlaneVector(1)*slipPlaneVector(2)/(normSlipPlaneVector*normSl
 %% Pre-allocate and calculate dislocationPosition and dSourcePosition vectors
 dislocationPosition = zeros(nDisl, 3);
 dSourcePositions = zeros(nDSources, 3);
-for i=1:nDisl
+for i=1:nDSources
     dislocationPosition(i,:) = positionVector (dList(i).f, slipPlane.es);
     dSourcePositions(i,:) = positionVector (dSourceList(i).f, slipPlane.es);
 end
@@ -84,5 +84,8 @@ while continueSimulation
             continueSimulation = false;
         end
     end
-    pause
+    
+    disp('Total time'); disp (totalTime);
+    disp('#iterations'); disp(totalSteps);
+    %pause
 end
