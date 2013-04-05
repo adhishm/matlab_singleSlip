@@ -10,7 +10,9 @@ function flag = checkDipoleEmissions (tau, dSources)
     
     for i=1:nSources
         if tau > dSources(i).t
-            flag(i) = 1;
+            flag(i) = true;
+        else
+            flag(i) = false;
         end
     end
 end
