@@ -49,9 +49,10 @@ while continueSimulation
     
     %% Forces
     % Peach-Koehler force
-    f_PK = dislocation_PKForces(appliedStress, dList);
+    f_PK = BurgersVector * dislocation_PKForces(appliedStress, dList);
     % Dislocation interaction force
-    f_d  = dislocation_interactionForce (dList, slipPlane.es, mu, nu);
+    f_d  = (BurgersVector * BurgersVector / 1.0e-09) * ...
+            dislocation_interactionForce (dList, slipPlane.es, mu, nu);
     % Total force
     f_total = f_PK + f_d;
     
