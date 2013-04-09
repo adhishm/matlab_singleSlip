@@ -8,22 +8,12 @@ initializeSimulation;
 %% Load data from files
 dList = readDislocationList ( dislocationStructureFile );
 dSourceList = readDislocationSourceList ( dislocationSourceFile );
-% nDisl = length(dList);
-% nDSources = length(dSourceList);
 
 %% Slip plane
 slipPlane = createSlipPlane (dList, dSourceList, extremities, fpos);
 slipPlaneVector = slipPlane.es(1,:) - slipPlane.es(2,:);
 normSlipPlaneVector = norm(slipPlaneVector);
 SchmidFactor = slipPlaneVector(1)*slipPlaneVector(2)/(normSlipPlaneVector*normSlipPlaneVector);
-
-%% Pre-allocate and calculate dislocationPosition and dSourcePosition vectors
-% dislocationPosition = zeros(nDisl, 3);
-% dSourcePositions = zeros(nDSources, 3);
-% for i=1:nDSources
-%     dislocationPosition(i,:) = positionVector (dList(i).f, slipPlane.es);
-%     dSourcePositions(i,:) = positionVector (dSourceList(i).f, slipPlane.es);
-% end
 
 %% Initiate the figure
 figureHandle = figure;
@@ -32,6 +22,17 @@ figureHandle = figure;
 totalTime = 0.0;
 totalSteps = 0;
 continueSimulation = true;
+
+%% Initialize statistics
+if stoppingCriterion==1
+    % Number of steps
+    nIterations = limitingSteps;
+else
+    % Time
+    nIterations = 1 + (limitingTime/timeStep);
+end
+
+stats = cell (nIterations, 5);  % Time, fPK, f_interaction, f_total, velocity
 
 %% Iterate
 while continueSimulation
@@ -95,6 +96,13 @@ while continueSimulation
             continueSimulation = false;
         end
     end
+    
+    %% Write statistics
+    stats{totalSteps,1} = totalTime;
+    stats{totalSteps,2} = f_PK;
+    stats{totalSteps,3} = f_d;
+    stats{totalSteps,4} = f_total;
+    stats{totalSteps,5} = velocityList;
     
     disp('Total time'); disp (totalTime);
     disp('#iterations'); disp(totalSteps);
