@@ -69,13 +69,13 @@ while continueSimulation
     
     %% Dislocation dipole emissions
     % Resolved shear stress
-    tau = ( (appliedStress(1,1)+appliedStress(2,2)) * SchmidFactor ) + appliedStress(1,2);
-    dipoleEmissions = checkDipoleEmissions (tau, dSourceList);
-    for i=1:nDSources
-        if (dipoleEmissions(i))
-            dList = emitDipole (dSourceList(i), dList, slipPlane.es, tau, mu, nu, BurgersVector);
-        end
-    end
+%     tau = ( (appliedStress(1,1)+appliedStress(2,2)) * SchmidFactor ) + appliedStress(1,2);
+%     dipoleEmissions = checkDipoleEmissions (tau, dSourceList);
+%     for i=1:nDSources
+%         if (dipoleEmissions(i))
+%             dList = emitDipole (dSourceList(i), dList, slipPlane.es, tau, mu, nu, BurgersVector);
+%         end
+%     end
     
     %% Plot state
     plotState (figureHandle, dislocationPosition, dSourcePositions, slipPlane.es);
