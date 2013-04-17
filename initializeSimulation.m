@@ -7,8 +7,8 @@ dislocationStructureFile = 'dislList.txt';
 dislocationSourceFile    = 'dsourceList.txt';
 
 %% Slip plane
-extremities = [ 0 0 0;
-                5 5 5 ];
+extremities = [ 0  0  0;
+                50 50 50 ];
 fpos = 0.5;
 
 %% Material properties

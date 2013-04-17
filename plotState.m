@@ -5,10 +5,11 @@ function plotState (figureHandle, dislocationPosition, dSourcePositions, slipPla
 
     %% Initiate figure
     figure(figureHandle);
-    hold on
+    
     
     %% Draw slip plane
     plot3 (slipPlane(:,1), slipPlane(:,2), slipPlane(:,3), '-r');
+    hold on
     
     %% Draw dislocations
     plot3 (dislocationPosition(:,1), dislocationPosition(:,2), dislocationPosition(:,3), 'xk');
