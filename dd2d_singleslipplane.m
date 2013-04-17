@@ -59,6 +59,9 @@ while continueSimulation
     %% Dislocations velocities
     velocityList = dislocationVelocities (f_total, dragCoefficient);
     
+    %% Time step
+    globalTimeIncrement = timeIncrement (dList, dSourceList, dislocationPosition, dSourcePositions, velocityList, limitingDistance);
+    
     %% Move the dislocations
     % Initial absilute position vector
     dislocationPosition = dislocationPosition + (velocityList * timeStep) ;
