@@ -11,4 +11,5 @@ function dsrc = createDislocationSource (bvec, lvec, fpos, tauc)
     dsrc.l = lvec;
     dsrc.f = fpos;
     dsrc.t = tauc;
+    dsrc.s = 0;
 end
