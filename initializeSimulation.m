@@ -21,6 +21,9 @@ nu = 0.33;
 %% Simulation parameters
 limitingTimeStep = 1.0e-12;                    % s
 limitingDistance = 2.0 * BurgersVector;
+
+turnsDislocationSource = 10;
+
 appliedStress = 1.0e09 *  [ 0 0 0;
                             0 1 0;
                             0 0 0 ];    % Pa
