@@ -18,13 +18,13 @@ function dList = readDislocationList (filename, delimiter)
     
     %% Create the dislocation list
     % Preallocate the structure
-    dList(nData) = struct('b', [0 0 0], 'l', [0 0 0], 'f', 0);
+    dList(nData) = struct('b', [0 0 0], 'l', [0 0 0], 'f', 0, 'm', 0);
     % Populate the list from file data
     for i=1:nData
         bvec = data(i, 1:3);
         lvec = data(i, 4:6);
         fpos = data(i, 7);
-        dList(i) = createDislocation(bvec, lvec, fpos);
+        dList(i) = createDislocation(bvec, lvec, fpos, 1);
     end
     
     %% Clear memory

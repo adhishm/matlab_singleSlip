@@ -41,8 +41,8 @@ function updatedDislocationList = emitDipole (dSource, dList, slipPlaneExtremiti
     
     %% Create new dislocations
     
-    d1 = createDislocation (b1, l1, f1);
-    d2 = createDislocation (b2, l2, f2);
+    d1 = createDislocation (b1, l1, f1, 1);
+    d2 = createDislocation (b2, l2, f2, 1);
     
     %% Insert them into the dislocation list
     nDisl = length(dList);

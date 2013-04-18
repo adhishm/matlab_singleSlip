@@ -19,7 +19,8 @@ mu = 1.0e9;                             % Pa
 nu = 0.33;
 
 %% Simulation parameters
-timeStep = 10.0e-09;                    % s
+limitingTimeStep = 1.0e-12;                    % s
+limitingDistance = 2.0 * BurgersVector;
 appliedStress = 1.0e09 *  [ 0 0 0;
                             0 1 0;
                             0 0 0 ];    % Pa
