@@ -63,9 +63,10 @@ while continueSimulation
     globalTimeIncrement = timeIncrement (dList, dSourceList, dislocationPosition, dSourcePositions, velocityList, limitingDistance);
     
     %% Move the dislocations
-    % Initial absilute position vector
-    dislocationPosition = dislocationPosition + (velocityList * timeStep) ;
+    % Initial absolute position vector
     for i=1:nDisl
+        % Calculate position
+        dislocationPosition(i,:) = dislocationPosition(i,:) + (dList(i).m * velocityList(i) * timeStep) ;
         % Calculate fractional position
         dList(i).f = norm(dislocationPosition(i,:) - slipPlane.es(1,:))/normSlipPlaneVector;
     end
