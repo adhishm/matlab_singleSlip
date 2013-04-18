@@ -112,5 +112,6 @@ while continueSimulation
     
     disp('Total time'); disp (totalTime);
     disp('#iterations'); disp(totalSteps);
+    
     %pause
 end

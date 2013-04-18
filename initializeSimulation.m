@@ -24,9 +24,9 @@ limitingDistance = 2.0 * BurgersVector;
 
 turnsDislocationSource = 10;
 
-appliedStress = 1.0e09 *  [ 0 0 0;
-                            0 1 0;
-                            0 0 0 ];    % Pa
+appliedStress = 1.0e09 *  [ -2 0 0;
+                            1 1 0;
+                            0 0 1 ];    % Pa
 stoppingCriterion = 1;                  % 1: Number of steps; 2: time
 limitingSteps     = 1000;               % Number of steps
 limitingTime      = 1.0;                % Total time limit
