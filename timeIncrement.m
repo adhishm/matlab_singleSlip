@@ -14,6 +14,8 @@ function globalTimeIncrement = timeIncrement (dList, dSourceList, dislocationPos
     % vector (3), norm
     distanceVectors = zeros(nDisl, 4);
     velocityVectors = zeros(nDisl, 4);
+    idealTime       = zeros(nDisl, nDisl);
+    minTimeVector   = zeros(nDisl, 2);
     
     for i=1:nDisl
         
@@ -25,9 +27,13 @@ function globalTimeIncrement = timeIncrement (dList, dSourceList, dislocationPos
                 distanceVectors (j, 4)   = norm (distanceVectors (j, 1:3));
                 velocityVectors (j, 1:3) = velocityList (j,:) - velocityList (i,:);
                 velocityVectors (j, 4)   = norm (velocityVectors (j, 1:3));
+                idealTime(j, i) = (limitingDistance - distanceVectors(j,4))/velocityVectors(j,4);
+            else
+                idealTime(i,j) = 1000.0;    % Some huge number
             end
         end
         
+        [ minTimeVector(i, 2), minTimeVector(i,1) ] = min(idealTime(i,:));       
         
     end
     
