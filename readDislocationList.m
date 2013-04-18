@@ -24,7 +24,7 @@ function dList = readDislocationList (filename, delimiter)
         bvec = data(i, 1:3);
         lvec = data(i, 4:6);
         fpos = data(i, 7);
-        dList(i) = createDislocation(bvec, lvec, fpos);
+        dList(i) = createDislocation(bvec, lvec, fpos, 1);
     end
     
     %% Clear memory
