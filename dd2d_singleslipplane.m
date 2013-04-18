@@ -60,7 +60,8 @@ while continueSimulation
     velocityList = dislocationVelocities (f_total, dragCoefficient);
     
     %% Time step
-    globalTimeIncrement = timeIncrement (dList, dSourceList, dislocationPosition, dSourcePositions, velocityList, limitingDistance);
+    globalTimeIncrement = timeIncrement (dList, dislocationPosition, velocityList, ...
+                                        limitingDistance, limitingTimeStep);
     
     %% Move the dislocations
     % Initial absolute position vector

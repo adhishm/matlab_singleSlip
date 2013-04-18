@@ -1,5 +1,7 @@
-function globalTimeIncrement = timeIncrement (dList, dSourceList, dislocationPosition, dSourcePositions, velocityList, limitingDistance)
-%% globalTimeIncrement = timeIncrement (dList, dSourceList, dislocationPosition, dSourcePositions, velocityList, limitingDistance)
+function globalTimeIncrement = timeIncrement (dList, dislocationPosition, velocityList, ...
+                                            limitingDistance, limitingTimeStep)
+%% globalTimeIncrement = timeIncrement (dList, dislocationPosition, velocityList, ...
+%                                           limitingDistance, limitingTimeStep)
 %  Calculates the time increment based on the limiting distance up to which
 %  one dislocation approach another. Beyond this, both dislocations are
 %  pinned.
@@ -19,7 +21,7 @@ function globalTimeIncrement = timeIncrement (dList, dSourceList, dislocationPos
     
     for i=1:nDisl
         
-        unitV = velocityList(i,:)/norm(velocityList(i,:));  % Unit vector for velocity
+        %unitV = velocityList(i,:)/norm(velocityList(i,:));  % Unit vector for velocity
         
         for j=1:nDisl
             if (i~=j)
@@ -32,9 +34,16 @@ function globalTimeIncrement = timeIncrement (dList, dSourceList, dislocationPos
                 idealTime(i,j) = 1000.0;    % Some huge number
             end
         end
-        
-        [ minTimeVector(i, 2), minTimeVector(i,1) ] = min(idealTime(i,:));       
-        
+        % Find minimum time
+        [ minTimeVector(i, 2), minTimeVector(i,1) ] = min(idealTime(i,:));
+        if (minTimeVector(i,2) < limitingTimeStep)
+            minTimeVector(i,2) = limitingTimeStep;
+            minTimeVector(i,1) = 0;
+        end
     end
+    
+    globalTimeIncrement = min(minTimeVector(:,2));
+    
+end
     
     
