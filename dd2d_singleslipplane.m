@@ -67,7 +67,7 @@ while continueSimulation
     % Initial absolute position vector
     for i=1:nDisl
         % Calculate position
-        dislocationPosition(i,:) = dislocationPosition(i,:) + (dList(i).m * velocityList(i) * timeStep) ;
+        dislocationPosition(i,:) = dislocationPosition(i,:) + (dList(i).m * velocityList(i) * globalTimeIncrement) ;
         % Calculate fractional position
         dList(i).f = norm(dislocationPosition(i,:) - slipPlane.es(1,:))/normSlipPlaneVector;
     end
@@ -87,7 +87,7 @@ while continueSimulation
     
     %% Simulation parameters
     % Time step
-    totalTime = totalTime + timeStep;
+    totalTime = totalTime + globalTimeIncrement;
     % Number of iterations
     totalSteps = totalSteps + 1;
     % Stopping criterion
